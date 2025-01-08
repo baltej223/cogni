@@ -53,25 +53,25 @@ function generateRandomNumber(length: number): string {
 }
 
 const Lab = () => {
-  const minLength = 4;
+  const minLength:number = 4;
 
   const [length, setLength] = useState(minLength);
   const lengthRef = useRef<HTMLInputElement>(null)
-  const [Number, setNumber] = useState("0");
+  const [randomNumber, setRandomNumber] = useState("0");
 
   useEffect(() => {
-    setNumber(generateRandomNumber(length));
+    setRandomNumber(generateRandomNumber(length));
   }, [length])
   return (
     <>
       <div className="flex flex-col items-center justify-center rounded">
         <div className="flex flex-col justify-center items-center w-3/4 h-[200px] bg-gray-900 mt-10 rounded-xl">
           <span className="text-white  pb-5 text-xl">Output will be like:</span>
-          <input type="text" className="w-[400px] h-[40px] outline-none rounded text-xl" value={Number} />
+          <input type="text" className="w-[400px] h-[40px] outline-none rounded text-xl" value={randomNumber} />
 
           <div className="flex flex-column gap-x-10">
             <input type="range" max="20" min={minLength} ref={lengthRef} value={length} onChange={() => {
-              setLength( Number(lengthRef.current?.value) || minLength )
+              setLength(Number(lengthRef.current?.value) || minLength)
             }} /><label className="text-white">Length: {length}</label>
           </div>
           <Button className="mt-10 text-black hover:bg-black hover:text-white bg-white w-20 h-10" onClick={() => {
