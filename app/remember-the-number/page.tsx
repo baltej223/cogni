@@ -31,8 +31,6 @@ const StartContent = () => {
       </div>
       <div className="py-20 w-full h-20 flex justify-center items-center">
         <Button className="w-40 h-16 text-2xl" variant="outline" onClick={() => {
-          console.log("donw");
-
           next();
         }}>Start</Button>
       </div>
@@ -123,7 +121,6 @@ const Remember = () => {
         window.localStorage.setItem("current-date", formattedDate);
 
         //also clear random number
-
         const TIME_TAKEN_TO_REMEMBER = 5000; //5s
         setTimeout(() => {
           // setCountdown(0);
@@ -228,13 +225,10 @@ const InputRememberedNumber = () => {
         if (numRef.current?.value == RandINT) {
           setAns("Correct");
           // clearing local stoage
-          // localStorage.clear()//("Endtime");
+          // localStorage.clear()//Endtime;
           setTimeout(()=>{
             localStorage.clear()
           },2000)
-          // localStorage.clear()//("RandINT");
-          // localStorage.clear()//("current-date");
-          // localStorage.clear()//("length");
           
         }
         else {
@@ -294,7 +288,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div className="w-full hidden flex flex-column gap-x-3 justify-end pr-5 cursor-pointer">
+      <div className="w-full flex flex-column gap-x-3 justify-end pr-5 cursor-pointer">
         <div id="next" onClick={() => {
           if (nextPage < 5) {
             setNextPage(nextPage + 1);
