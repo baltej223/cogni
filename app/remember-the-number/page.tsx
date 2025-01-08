@@ -12,7 +12,7 @@ function next(){
 
 
 // function prev(){
-//   const nextButton = document.querySelector("#next");
+//   const nextButton = document.querySelector("#prev");
 //   if (nextButton) {
 //     (nextButton as HTMLElement).click();
 //   }
