@@ -56,7 +56,7 @@ const Lab = () => {
   const minLength = 4;
 
   const [length, setLength] = useState(minLength);
-  const lengthRef = useRef("")
+  const lengthRef = useRef<HTMLInputElement>(null)
   const [Number, setNumber] = useState("0");
 
   useEffect(() => {
@@ -71,11 +71,11 @@ const Lab = () => {
 
           <div className="flex flex-column gap-x-10">
             <input type="range" max="20" min={minLength} ref={lengthRef} value={length} onChange={() => {
-              setLength(lengthRef.current.value)
+              setLength(Number(lengthRef.current?.value) || minLength)
             }} /><label className="text-white">Length: {length}</label>
           </div>
           <Button className="mt-10 text-black hover:bg-black hover:text-white bg-white w-20 h-10" onClick={() => {
-            window.localStorage.setItem("length", length)
+            window.localStorage.setItem("length", length.toString())
 
             next();
           }}>START!</Button>
