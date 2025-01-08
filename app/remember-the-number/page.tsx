@@ -71,7 +71,9 @@ const Lab = () => {
 
           <div className="flex flex-column gap-x-10">
             <input type="range" max="20" min={minLength} ref={lengthRef} value={length} onChange={() => {
-              setLength(Number(lengthRef.current?.value) || minLength)
+              // setLength(Number(lengthRef.current?.value) || minLength)
+              const newValue = lengthRef.current ? parseInt(lengthRef.current.value, 10) : minLength;
+                setLength(newValue);
             }} /><label className="text-white">Length: {length}</label>
           </div>
           <Button className="mt-10 text-black hover:bg-black hover:text-white bg-white w-20 h-10" onClick={() => {
@@ -124,7 +126,7 @@ const Remember = () => {
 
         const TIME_TAKEN_TO_REMEMBER = 5000; //5s
         setTimeout(() => {
-          setCountdown(0);
+          // setCountdown(0);
           setTimeout(() => {
             const nextButton = document.querySelector("#next");
             if (nextButton) {
@@ -247,7 +249,7 @@ const InputRememberedNumber = () => {
     <div className="flex justify-center w-full items center">
     <div className="flex flex-col bg-gray-800 w-1/2 h-[300px] mt-20 justify-center items-center gap-y-4 rounded-3xl">
       <span className="text-white text-3xl font-bold">
-        Not Now
+        Remember Hard!
       </span>
       <span className="text-white">Come back at</span>
       <span className="text-white text-xl">{localStorage.getItem("Endtime")?.replace("At","")}</span>
