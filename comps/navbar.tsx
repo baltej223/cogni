@@ -9,7 +9,7 @@ export default function Navbar(){
                 <nav className="pl-10 flex items-center h-full gap-x-5 w-11/12">
                     <div className="text-xl font-bold">Congni</div>
                     <Separator orientation="vertical" className="h-1/2"/>
-                    <Link href="#">Home</Link>
+                    <Link href="./">Home</Link>
                     <Separator orientation="vertical" className="h-1/2"/>
                     <Link href="./remember-the-number">Remeber The Number</Link>
                     <Separator orientation="vertical" className="h-1/2"/>
