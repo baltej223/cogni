@@ -11,12 +11,12 @@ function next(){
 }
 
 
-function prev(){
-  const nextButton = document.querySelector("#next");
-  if (nextButton) {
-    (nextButton as HTMLElement).click();
-  }
-}
+// function prev(){
+//   const nextButton = document.querySelector("#next");
+//   if (nextButton) {
+//     (nextButton as HTMLElement).click();
+//   }
+// }
 
 
 const StartContent = () => {
@@ -147,14 +147,14 @@ const Remember = () => {
 }
 
 const Timer = () => {
-  let [timeLeft, setTimeLeft] = useState("Time");
+  const [timeLeft, setTimeLeft] = useState("Time");
   const REMEMBERING_TIME = window.localStorage.getItem("current-date"); // of format date:hours:minutes:seconds
   const pauseTimeRef = useRef("");
   const [pauseTime, setPauseTime] = useState(4);
 
   useEffect(() => {
     if (REMEMBERING_TIME) {
-      let remTime_formated = REMEMBERING_TIME.split(":").map(Number);
+      const remTime_formated = REMEMBERING_TIME.split(":").map(Number);
       const pauseTime_formated = [0, pauseTime, 0, 0];
       let nextDay = false;
       const pauseTimeSec = pauseTime_formated[1] * 3600;
@@ -168,14 +168,14 @@ const Timer = () => {
       }
 
       if (!nextDay) {
-        let Finalhr = Math.floor(FinalTime / 3600);
-        let Finalmin = Math.floor((FinalTime % 3600) / 60);
-        let Finalsec = FinalTime % 60;
+        const Finalhr = Math.floor(FinalTime / 3600);
+        const Finalmin = Math.floor((FinalTime % 3600) / 60);
+        const Finalsec = FinalTime % 60;
         setTimeLeft(`At ${Finalhr}:${Finalmin}:${Finalsec}`);
       } else {
-        let Finalhr = Math.floor(FinalTime / 3600);
-        let Finalmin = Math.floor((FinalTime % 3600) / 60);
-        let Finalsec = FinalTime % 60;
+        const Finalhr = Math.floor(FinalTime / 3600);
+        const Finalmin = Math.floor((FinalTime % 3600) / 60);
+        const Finalsec = FinalTime % 60;
         setTimeLeft(`At ${Finalhr}:${Finalmin}:${Finalsec} Next day`);
       }
     }
@@ -200,15 +200,13 @@ const Timer = () => {
 }
 
 const InputRememberedNumber = () => {
-  let numRef = useRef("");
-  let [ans, setAns] = useState("");
-  let endDate = 0;
+  const numRef = useRef("");
+  const [ans, setAns] = useState("");
   let endtime = localStorage.getItem("Endtime")?.replaceAll("At","");
   if (endtime?.includes("Next day")) {
-    endDate = +1;
     endtime.replace("Next day", "");
   }
-  endtime = endtime?.split(":")
+  endtime = endtime?.split(":");
   endtime = [Number(endtime[0]), Number(endtime[1]), Number(endtime[2])];
   const date = new Date();
   // const day = date.getDate();
