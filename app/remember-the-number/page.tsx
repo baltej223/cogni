@@ -71,7 +71,7 @@ const Lab = () => {
 
           <div className="flex flex-column gap-x-10">
             <input type="range" max="20" min={minLength} ref={lengthRef} value={length} onChange={() => {
-              setLength(Number(lengthRef.current?.value) || minLength)
+              setLength( Number(lengthRef.current?.value) || minLength )
             }} /><label className="text-white">Length: {length}</label>
           </div>
           <Button className="mt-10 text-black hover:bg-black hover:text-white bg-white w-20 h-10" onClick={() => {
@@ -110,7 +110,7 @@ const Remember = () => {
         const LENGTH_OF_RANDOM_NUMBER = Number(window.localStorage.getItem("length"));
         const GENRATED_RANDOM_NUMBER = Number(generateRandomNumber(LENGTH_OF_RANDOM_NUMBER));
         setCountdown(GENRATED_RANDOM_NUMBER);
-        window.localStorage.setItem("RandINT", GENRATED_RANDOM_NUMBER)
+        window.localStorage.setItem("RandINT", GENRATED_RANDOM_NUMBER.toString())
         //also add date to local Storage to
         const date = new Date();
         const day = date.getDate();
@@ -149,7 +149,7 @@ const Remember = () => {
 const Timer = () => {
   const [timeLeft, setTimeLeft] = useState("Time");
   const REMEMBERING_TIME = window.localStorage.getItem("current-date"); // of format date:hours:minutes:seconds
-  const pauseTimeRef = useRef("");
+  const pauseTimeRef = useRef<HTMLInputElement>(null);
   const [pauseTime, setPauseTime] = useState(4);
 
   useEffect(() => {
@@ -188,7 +188,7 @@ const Timer = () => {
           <span className="text-white text-sm">Come after : {pauseTime}hrs</span>
           <span className="text-white text-2xl">{timeLeft}</span>
           <input type="range" min="1" max="24" ref={pauseTimeRef} value={pauseTime} onChange={() => {
-            setPauseTime(pauseTimeRef.current.value);
+            setPauseTime(Number(pauseTimeRef.current?.value) || 1);
           }} /> {/* Come After time much time */}
           <Button onClick={() => {
             window.localStorage.setItem("Endtime", timeLeft);
@@ -200,14 +200,14 @@ const Timer = () => {
 }
 
 const InputRememberedNumber = () => {
-  const numRef = useRef("");
+  const numRef = useRef<HTMLInputElement>(null);
   const [ans, setAns] = useState("");
-  let endtime = localStorage.getItem("Endtime")?.replaceAll("At","");
+  const endtime = localStorage.getItem("Endtime")?.replaceAll("At","");
   if (endtime?.includes("Next day")) {
     endtime.replace("Next day", "");
   }
-  endtime = endtime?.split(":");
-  endtime = [Number(endtime[0]), Number(endtime[1]), Number(endtime[2])];
+  const endtimeStrArray = endtime?.split(":").map(Number);
+  const endtimeArr = endtimeStrArray ? [Number(endtimeStrArray[0]), Number(endtimeStrArray[1]), Number(endtimeStrArray[2])] : [0, 0, 0];
   const date = new Date();
   // const day = date.getDate();
   const hours = date.getHours();
@@ -217,13 +217,13 @@ const InputRememberedNumber = () => {
   console.log(endtime);
   console.log(hours, minutes, seconds);
 
-  if (endtime[0] < hours || ((endtime[0]==hours)?((endtime[1]<minutes)?true:false):false)) {
+  if (endtimeArr[0] < hours || ((endtimeArr[0]==hours)?((endtimeArr[1]<minutes)?true:false):false)) {
   return (
     <div className="flex bg-gray-800 w-full h-[200px] mt-20 justify-center items-center gap-y-20">
       <input type="text" className="outline-none h-[30px] rounded pl-2" placeholder="Enter Number" ref={numRef} />
       <Button className="ml-[-5px]" onClick={() => {
         const RandINT = window.localStorage.getItem("RandINT");
-        if (numRef.current.value == RandINT) {
+        if (numRef.current?.value == RandINT) {
           setAns("Correct");
           // clearing local stoage
           // localStorage.clear()//("Endtime");
