@@ -124,7 +124,7 @@ const Remember = () => {
 
         const TIME_TAKEN_TO_REMEMBER = 5000; //5s
         setTimeout(() => {
-          setCountdown("---");
+          setCountdown(0);
           setTimeout(() => {
             const nextButton = document.querySelector("#next");
             if (nextButton) {
