@@ -68,7 +68,7 @@ const Lab = () => {
           <input type="text" className="w-[400px] h-[40px] outline-none rounded text-xl" value={randomNumber} />
 
           <div className="flex flex-column gap-x-10">
-            <input type="range" max="20" min={minLength} ref={lengthRef} value={length} onChange={() => {
+            <input type="range" max="20" min={minLength} ref={lengthRef} value={length} readOnly={true} onChange={() => {
               // setLength(Number(lengthRef.current?.value) || minLength)
               const newValue = lengthRef.current ? parseInt(lengthRef.current.value, 10) : minLength;
                 setLength(newValue);
@@ -255,7 +255,7 @@ const InputRememberedNumber = () => {
 
 export default function Home() {
   const [content, setContent] = useState(<StartContent />);
-  const [nextPage, setNextPage] = useState(0);
+  const [nextPage, setNextPage] = useState(1);
 
   function numToEnter(){
     if (localStorage.getItem("RandINT")){
